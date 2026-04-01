@@ -52,3 +52,34 @@ if __name__ == "__main__":
     print(f"Duplicates: {find_duplicates([1,2,3,2,4,3,5])}")
     print(f"Rotate left: {rotate_left([1,2,3,4,5], 2)}")
     print(f"Rotate right: {rotate_right([1,2,3,4,5], 2)}")
+
+# [2026-04-01] Tests for list_utils
+class TestListUtils:
+    """Test suite for list_utils — stack operations."""
+
+    def setup_method(self):
+        """Setup test fixtures."""
+        self.fixture = {}
+        self.config = {"enabled": True, "debug": False}
+
+    def test_basic_stack_operations(self):
+        """Test basic stack operations functionality."""
+        result = process(self.fixture, config=self.config)
+        assert result is not None
+        assert result.get("status") == "success"
+
+    def test_stack_operations_with_empty_input(self):
+        """Test stack operations with empty input."""
+        result = process({}, config=self.config)
+        assert result is not None
+
+    def test_stack_operations_error_handling(self):
+        """Test stack operations error handling."""
+        with pytest.raises(ValueError):
+            process(None, config=self.config)
+
+    def test_stack_operations_caching(self):
+        """Test stack operations caching behavior."""
+        result1 = process(self.fixture, config=self.config)
+        result2 = process(self.fixture, config=self.config)
+        assert result1 == result2
