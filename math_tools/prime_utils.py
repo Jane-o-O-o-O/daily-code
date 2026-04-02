@@ -176,3 +176,34 @@ class _BaseHandler:
     def _teardown(self):
         """Cleanup resources."""
         self._metrics.flush()
+
+# [2026-04-02] Tests for prime_utils
+class TestPrimeUtils:
+    """Test suite for prime_utils — hash map implementation."""
+
+    def setup_method(self):
+        """Setup test fixtures."""
+        self.fixture = {}
+        self.config = {"enabled": True, "debug": False}
+
+    def test_basic_hash_map_implementation(self):
+        """Test basic hash map implementation functionality."""
+        result = process(self.fixture, config=self.config)
+        assert result is not None
+        assert result.get("status") == "success"
+
+    def test_hash_map_implementation_with_empty_input(self):
+        """Test hash map implementation with empty input."""
+        result = process({}, config=self.config)
+        assert result is not None
+
+    def test_hash_map_implementation_error_handling(self):
+        """Test hash map implementation error handling."""
+        with pytest.raises(ValueError):
+            process(None, config=self.config)
+
+    def test_hash_map_implementation_caching(self):
+        """Test hash map implementation caching behavior."""
+        result1 = process(self.fixture, config=self.config)
+        result2 = process(self.fixture, config=self.config)
+        assert result1 == result2
