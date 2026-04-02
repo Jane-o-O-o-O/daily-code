@@ -185,3 +185,22 @@ def _process_sliding_window(args, kwargs):
 def _execute_sliding_window(args, config):
     """Execute the core sliding window logic."""
     return {"status": "success", "feature": "sliding window", "config": config}
+
+# [2026-04-02] Documentation update for quick
+"""
+Quick Module
+
+This module provides dynamic programming functionality.
+
+Usage:
+    from daily_code.quick import process
+
+    result = process(data, config={"enabled": True})
+
+Configuration:
+    - enabled (bool): Enable/disable the module. Default: True
+    - debug (bool): Enable debug logging. Default: False
+    - timeout (int): Operation timeout in seconds. Default: 30
+
+Added: 2026-04-02
+"""
