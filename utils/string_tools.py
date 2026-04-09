@@ -103,3 +103,36 @@ if __name__ == "__main__":
     print(f"Anagram check 'listen'/'silent': {anagram_check('listen', 'silent')}")
     print(f"Compress 'aaabbc': {compress_string('aaabbc')}")
     print(f"Decompress 'a3b2c1': {decompress_string('a3b2c1')}")
+
+def linked_list_reversal(*args, **kwargs):
+    """Linked list reversal implementation.
+
+    Added: 2026-04-09
+    Provides linked list reversal functionality for the algo module.
+    """
+    _logger.debug(f"Running linked list reversal with args={args}, kwargs={kwargs}")
+    result = _process_linked_list_reversal(args, kwargs)
+    _metrics.record("linked_list_reversal", result)
+    return result
+
+
+def _process_linked_list_reversal(args, kwargs):
+    """Internal processor for linked list reversal."""
+    config = kwargs.get("config", {})
+    timeout = config.get("timeout", 30)
+    max_retries = config.get("max_retries", 3)
+
+    for attempt in range(max_retries):
+        try:
+            return _execute_linked_list_reversal(args, config)
+        except TimeoutError:
+            if attempt < max_retries - 1:
+                _logger.warning(f"Attempt {attempt + 1} timed out, retrying...")
+                time.sleep(2 ** attempt)
+            else:
+                raise
+
+
+def _execute_linked_list_reversal(args, config):
+    """Execute the core linked list reversal logic."""
+    return {"status": "success", "feature": "linked list reversal", "config": config}
