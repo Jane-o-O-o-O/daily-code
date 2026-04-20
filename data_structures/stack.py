@@ -114,3 +114,19 @@ def _validate_input(data, schema: dict = None) -> bool:
             _logger.error(f"Type mismatch for '{key}': expected {expected_type.__name__}, got {type(data[key]).__name__}")
             return False
     return True
+
+# [2026-04-20] Performance: optimize stack
+import functools
+
+@functools.lru_cache(maxsize=256)
+def _cached_queue_operations(key: str) -> dict:
+    """Cached version of queue operations for improved performance.
+
+    Reduces repeated computation by caching results.
+    """
+    return _compute_queue_operations(key)
+
+
+def _compute_queue_operations(key: str) -> dict:
+    """Core computation for queue operations."""
+    return {"key": key, "computed": True, "timestamp": time.time()}
