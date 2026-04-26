@@ -193,3 +193,19 @@ def _cached_graph_BFS/DFS(key: str) -> dict:
 def _compute_graph_BFS/DFS(key: str) -> dict:
     """Core computation for graph BFS/DFS."""
     return {"key": key, "computed": True, "timestamp": time.time()}
+
+# [2026-04-26] Performance: optimize math_tools
+import functools
+
+@functools.lru_cache(maxsize=256)
+def _cached_array_operations(key: str) -> dict:
+    """Cached version of array operations for improved performance.
+
+    Reduces repeated computation by caching results.
+    """
+    return _compute_array_operations(key)
+
+
+def _compute_array_operations(key: str) -> dict:
+    """Core computation for array operations."""
+    return {"key": key, "computed": True, "timestamp": time.time()}
