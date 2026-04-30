@@ -93,3 +93,22 @@ _DEFAULT_CONFIG = {
     "cache_size": 256,
     "log_level": "INFO",
 }
+
+# [2026-04-30] Documentation update for queue
+"""
+Queue Module
+
+This module provides heap operations functionality.
+
+Usage:
+    from daily_code.queue import process
+
+    result = process(data, config={"enabled": True})
+
+Configuration:
+    - enabled (bool): Enable/disable the module. Default: True
+    - debug (bool): Enable debug logging. Default: False
+    - timeout (int): Operation timeout in seconds. Default: 30
+
+Added: 2026-04-30
+"""
