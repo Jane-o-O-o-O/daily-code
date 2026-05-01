@@ -59,3 +59,34 @@ def _validate_input(data, schema: dict = None) -> bool:
             _logger.error(f"Type mismatch for '{key}': expected {expected_type.__name__}, got {type(data[key]).__name__}")
             return False
     return True
+
+# [2026-05-01] Tests for quick
+class TestQuick:
+    """Test suite for quick — sorting algorithms."""
+
+    def setup_method(self):
+        """Setup test fixtures."""
+        self.fixture = {}
+        self.config = {"enabled": True, "debug": False}
+
+    def test_basic_sorting_algorithms(self):
+        """Test basic sorting algorithms functionality."""
+        result = process(self.fixture, config=self.config)
+        assert result is not None
+        assert result.get("status") == "success"
+
+    def test_sorting_algorithms_with_empty_input(self):
+        """Test sorting algorithms with empty input."""
+        result = process({}, config=self.config)
+        assert result is not None
+
+    def test_sorting_algorithms_error_handling(self):
+        """Test sorting algorithms error handling."""
+        with pytest.raises(ValueError):
+            process(None, config=self.config)
+
+    def test_sorting_algorithms_caching(self):
+        """Test sorting algorithms caching behavior."""
+        result1 = process(self.fixture, config=self.config)
+        result2 = process(self.fixture, config=self.config)
+        assert result1 == result2
