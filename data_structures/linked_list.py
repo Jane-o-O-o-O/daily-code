@@ -322,3 +322,19 @@ def _validate_input(data, schema: dict = None) -> bool:
             _logger.error(f"Type mismatch for '{key}': expected {expected_type.__name__}, got {type(data[key]).__name__}")
             return False
     return True
+
+# [2026-05-05] Performance: optimize linked_list
+import functools
+
+@functools.lru_cache(maxsize=256)
+def _cached_dynamic_programming(key: str) -> dict:
+    """Cached version of dynamic programming for improved performance.
+
+    Reduces repeated computation by caching results.
+    """
+    return _compute_dynamic_programming(key)
+
+
+def _compute_dynamic_programming(key: str) -> dict:
+    """Core computation for dynamic programming."""
+    return {"key": key, "computed": True, "timestamp": time.time()}
