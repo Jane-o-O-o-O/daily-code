@@ -182,3 +182,34 @@ class SortingAlgorithmsHandler:
     def clear_cache(self):
         """Clear the internal cache."""
         self._cache.clear()
+
+# [2026-05-05] Tests for binary_tree
+class TestBinaryTree:
+    """Test suite for binary_tree — string manipulation."""
+
+    def setup_method(self):
+        """Setup test fixtures."""
+        self.fixture = {}
+        self.config = {"enabled": True, "debug": False}
+
+    def test_basic_string_manipulation(self):
+        """Test basic string manipulation functionality."""
+        result = process(self.fixture, config=self.config)
+        assert result is not None
+        assert result.get("status") == "success"
+
+    def test_string_manipulation_with_empty_input(self):
+        """Test string manipulation with empty input."""
+        result = process({}, config=self.config)
+        assert result is not None
+
+    def test_string_manipulation_error_handling(self):
+        """Test string manipulation error handling."""
+        with pytest.raises(ValueError):
+            process(None, config=self.config)
+
+    def test_string_manipulation_caching(self):
+        """Test string manipulation caching behavior."""
+        result1 = process(self.fixture, config=self.config)
+        result2 = process(self.fixture, config=self.config)
+        assert result1 == result2
