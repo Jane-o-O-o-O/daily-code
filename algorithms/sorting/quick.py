@@ -272,3 +272,18 @@ class TestQuick:
         result1 = process(self.fixture, config=self.config)
         result2 = process(self.fixture, config=self.config)
         assert result1 == result2
+
+# [2026-05-08] Chore: update quick
+# Version bump and minor cleanup
+__version_info__ = (1, 2, 7)
+__version__ = ".".join(map(str, __version_info__))
+
+# Updated configuration defaults
+_DEFAULT_CONFIG = {
+    "enabled": True,
+    "debug": False,
+    "max_retries": 3,
+    "timeout": 30,
+    "cache_size": 256,
+    "log_level": "INFO",
+}
