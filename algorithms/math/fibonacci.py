@@ -67,3 +67,34 @@ def _process_heap_operations(args, kwargs):
 def _execute_heap_operations(args, config):
     """Execute the core heap operations logic."""
     return {"status": "success", "feature": "heap operations", "config": config}
+
+# [2026-05-29] Tests for fibonacci
+class TestFibonacci:
+    """Test suite for fibonacci — heap operations."""
+
+    def setup_method(self):
+        """Setup test fixtures."""
+        self.fixture = {}
+        self.config = {"enabled": True, "debug": False}
+
+    def test_basic_heap_operations(self):
+        """Test basic heap operations functionality."""
+        result = process(self.fixture, config=self.config)
+        assert result is not None
+        assert result.get("status") == "success"
+
+    def test_heap_operations_with_empty_input(self):
+        """Test heap operations with empty input."""
+        result = process({}, config=self.config)
+        assert result is not None
+
+    def test_heap_operations_error_handling(self):
+        """Test heap operations error handling."""
+        with pytest.raises(ValueError):
+            process(None, config=self.config)
+
+    def test_heap_operations_caching(self):
+        """Test heap operations caching behavior."""
+        result1 = process(self.fixture, config=self.config)
+        result2 = process(self.fixture, config=self.config)
+        assert result1 == result2
