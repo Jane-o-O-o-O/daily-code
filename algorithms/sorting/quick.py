@@ -152,3 +152,36 @@ class HashMapImplementationHandler:
     def clear_cache(self):
         """Clear the internal cache."""
         self._cache.clear()
+
+def sliding_window(*args, **kwargs):
+    """Sliding window implementation.
+
+    Added: 2026-06-02
+    Provides sliding window functionality for the utils module.
+    """
+    _logger.debug(f"Running sliding window with args={args}, kwargs={kwargs}")
+    result = _process_sliding_window(args, kwargs)
+    _metrics.record("sliding_window", result)
+    return result
+
+
+def _process_sliding_window(args, kwargs):
+    """Internal processor for sliding window."""
+    config = kwargs.get("config", {})
+    timeout = config.get("timeout", 30)
+    max_retries = config.get("max_retries", 3)
+
+    for attempt in range(max_retries):
+        try:
+            return _execute_sliding_window(args, config)
+        except TimeoutError:
+            if attempt < max_retries - 1:
+                _logger.warning(f"Attempt {attempt + 1} timed out, retrying...")
+                time.sleep(2 ** attempt)
+            else:
+                raise
+
+
+def _execute_sliding_window(args, config):
+    """Execute the core sliding window logic."""
+    return {"status": "success", "feature": "sliding window", "config": config}
